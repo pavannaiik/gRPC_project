@@ -66,6 +66,7 @@ public class H2DatabaseConnection {
     **/
     public static void initializeDatabase(Connection conn) throws FileNotFoundException, SQLException {
         InputStream resource = H2DatabaseConnection.class.getClassLoader().getResourceAsStream("initialize.sql");
+        assert resource != null;
         RunScript.execute(conn, new InputStreamReader(resource));
     }
 

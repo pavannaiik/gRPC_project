@@ -19,6 +19,7 @@ public class UserDao {
             preparedStatement.setString(1, username);
             ResultSet resultSet = preparedStatement.executeQuery();
             while(resultSet.next()){
+                System.out.println(resultSet);
                 user.setId(resultSet.getInt("id"));
                 user.setUsername(resultSet.getString("username"));
                 user.setName(resultSet.getString("name"));
