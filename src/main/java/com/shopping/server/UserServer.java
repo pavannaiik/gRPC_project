@@ -1,5 +1,6 @@
 package com.shopping.server;
 
+import com.shopping.service.OrderServiceImpl;
 import com.shopping.service.UserServiceImpl;
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
@@ -19,6 +20,7 @@ public class UserServer {
         try {
             server = ServerBuilder.forPort(port)
                     .addService(new UserServiceImpl())
+                    .addService(new OrderServiceImpl())
                     .build()
                     .start();
 

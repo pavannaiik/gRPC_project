@@ -11,12 +11,17 @@ import com.shopping.stubs.orders.OrderServiceGrpc;
 import io.grpc.stub.StreamObserver;
 
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 public class OrderServiceImpl extends OrderServiceGrpc.OrderServiceImplBase {
+
+    private Logger logger = Logger.getLogger(OrderServiceImpl.class.getName());
     private OrderDao orderDao = new OrderDao();
     @Override
     public void getOrderDetails(OrderRequest request, StreamObserver<OrderResponse> responseObserver) {
+        logger.info("Got Orders from OrderDao and converting to OrderResponse proto object ");
         List<Order> orders = orderDao.getOrders(request.getUserId());
 
         List<com.shopping.stubs.orders.Order> ordersForUsers = orders.stream().map(order-> com.shopping.stubs.orders.Order.newBuilder()
